@@ -13,6 +13,12 @@ export interface Planet {
     population: string;
 }
 
+export interface Starship {
+    name: string;
+    model: string;
+    starship_class: string;
+}
+
 export interface ApiResponse<T> {
     results: T[];
     next?: string;
@@ -23,15 +29,11 @@ export const fetchPeople = async ({ pageParam = 1 }: { pageParam: number }): Pro
     return response.data;
 };
 
-export const fetchSpaceships = async ({ pageParam = 1 }) => {
+export const fetchSpaceships = async ({ pageParam = 1 }): Promise<ApiResponse<Starship>> => {
     const response = await axios.get(`${API_URL}/starships/?page=${pageParam}`);
     return response.data;
 };
 
-// export const fetchPlanets = async ({ pageParam = 1 }) => {
-//     const response = await axios.get(`${API_URL}/planets/?page=${pageParam}`);
-//     return response.data;
-// };
 export const fetchPlanets = async ({ pageParam = 1 }: { pageParam: number }): Promise<ApiResponse<Planet>> => {
     const response = await axios.get(`${API_URL}/planets/?page=${pageParam}`);
     return response.data;

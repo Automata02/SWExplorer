@@ -2,18 +2,18 @@
 import React from 'react';
 import { View, Text, FlatList, ActivityIndicator } from 'react-native';
 import { InfiniteData, useInfiniteQuery } from '@tanstack/react-query';
-import { Planet, ApiResponse, fetchPlanets } from '../../networking/swapi';
+import { Starship, ApiResponse, fetchSpaceships } from '../../networking/swapi';
 
-const PlanetsScreen: React.FC = () => {
+const StarshipScreen: React.FC = () => {
     const {
         data,
         fetchNextPage,
         hasNextPage,
         isFetchingNextPage,
         status,
-    } = useInfiniteQuery<ApiResponse<Planet>, Error, InfiniteData<ApiResponse<Planet>>, string[], number>({
-        queryKey: ['planets'],
-        queryFn: ({ pageParam }) => fetchPlanets({ pageParam }),
+    } = useInfiniteQuery<ApiResponse<Starship>, Error, InfiniteData<ApiResponse<Starship>>, string[], number>({
+        queryKey: ['people'],
+        queryFn: ({ pageParam }) => fetchSpaceships({ pageParam }),
         initialPageParam: 1,
         getNextPageParam: (lastPage) => {
             if (!lastPage.next) { return undefined; }
@@ -26,17 +26,17 @@ const PlanetsScreen: React.FC = () => {
         case 'pending':
             return <ActivityIndicator />;
         case 'error':
-            return <Text>Error fetching data </Text>;
+            return <Text>Error fetching data</Text>;
         case 'success':
             return (
-                <FlatList<Planet>
+                <FlatList<Starship>
                     data={data.pages.flatMap(page => page.results)}
                     keyExtractor={(item) => item.name}
                     renderItem={({ item }) => (
                         <View style={{ padding: 16 }}>
-                            <Text style={{ fontWeight: 'bold' }}> {item.name} </Text>
-                            < Text > Climate: {item.climate} </Text>
-                            < Text > Population: {item.population} </Text>
+                            <Text>{item.name}</Text>
+                            <Text>Model: {item.model}</Text>
+                            <Text>Class: {item.starship_class}</Text>
                         </View>
                     )}
                     onEndReached={() => {
@@ -53,4 +53,4 @@ const PlanetsScreen: React.FC = () => {
     }
 };
 
-export default PlanetsScreen;
+export default StarshipScreen;
