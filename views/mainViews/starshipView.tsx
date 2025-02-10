@@ -12,7 +12,7 @@ const StarshipScreen: React.FC = () => {
         isFetchingNextPage,
         status,
     } = useInfiniteQuery<ApiResponse<Starship>, Error, InfiniteData<ApiResponse<Starship>>, string[], number>({
-        queryKey: ['people'],
+        queryKey: ['starships'],
         queryFn: ({ pageParam }) => fetchSpaceships({ pageParam }),
         initialPageParam: 1,
         getNextPageParam: (lastPage) => {
