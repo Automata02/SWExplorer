@@ -7,20 +7,20 @@ import { ListRenderItem } from 'react-native';
 
 const PeopleScreen: React.FC = () => {
     const renderItem: ListRenderItem<Person> = ({ item }) => (
-      <View style={{ padding: 16 }}>
-        <Text>{item.name}</Text>
-        <Text>Height: {item.height}</Text>
-      </View>
+        <View style={{ padding: 16 }}>
+            <Text>{item.name}</Text>
+            <Text>Height: {item.height}</Text>
+        </View>
     );
 
     return (
-      <InfiniteScrollList
-        queryKey="people"
-        fetchFn={fetchPeople}
-        renderItem={renderItem}
-      />
+        <InfiniteScrollList
+            queryKey="people"
+            fetchFn={fetchPeople}
+            renderItem={renderItem}
+        />
     );
-  };
+};
 
 export default PeopleScreen;
 
