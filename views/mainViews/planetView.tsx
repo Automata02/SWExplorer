@@ -8,8 +8,8 @@ const PlanetsScreen: React.FC = () => {
     const renderItem: ListRenderItem<Planet> = ({ item }) => (
         <View style={{ padding: 16 }}>
             <Text style={{ fontWeight: 'bold' }}> {item.name} </Text>
-            < Text > Climate: {item.climate} </Text>
-            < Text > Population: {item.population} </Text>
+            <Text> Climate: {item.climate} </Text>
+            <Text> Population: {item.population} </Text>
         </View>
     );
 
